@@ -50,7 +50,7 @@
         endThreshold: 0.3,
 
         // 默认实际播放倍速
-        defaultPlaybackRate: 16,
+        defaultPlaybackRate: 1,
 
         // 最大倍速
         maxPlaybackRate: 16,
@@ -294,16 +294,6 @@
 
     /******************************************************************
      * LearnTime body 修改
-     *
-     * 用于你自己的测试服务器。
-     *
-     * 实际播放器：
-     *
-     * video.playbackRate = playbackRate
-     *
-     * 测试请求：
-     *
-     * doubleSpeed = 1
      ******************************************************************/
 
     function rewriteLearnTimeBody(
