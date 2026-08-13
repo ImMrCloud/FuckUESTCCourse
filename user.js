@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         UESTC学习课程自动顺序播放
+// @name         UESTC学习课程自动播放 by MrCloud
 // @namespace    auto-course-player
 // @version      1.0.0
 // @description  自动识别未完成课程，播放结束后自动切换到下一个
@@ -8,5 +8,2825 @@
 // @run-at       document-idle
 // ==/UserScript==
 
+(function () {
+    'use strict';
 
-function _0x3fe1(_0x2c99f7,_0x152c74){const _0x5d582a=_0x5d58();return _0x3fe1=function(_0x3fe15e,_0x14384b){_0x3fe15e=_0x3fe15e-0xcf;let _0x5b64b8=_0x5d582a[_0x3fe15e];return _0x5b64b8;},_0x3fe1(_0x2c99f7,_0x152c74);}function _0x5d58(){const _0x4a2b58=['开始扫描未完成课程','paused','target','775512mMsTva','defaultPlaybackRate','课程自动播放助手\x20V3\x20已启动','scrollIntoView','auto','top','扫描课程，共发现\x20','auto-course-auto-resume','initDelay','href','play','倍速设置为\x20','视频已经在播放','setItem','.xgplayer-start','x，恢复为\x20','log','等待操作','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20暂停自动继续\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</label>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-auto-next\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20type=\x22checkbox\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','课程播放器启动失败','getSeconds','getElementById','color:#409EFF;font-weight:bold;','等待播放器加载...','检测到\x20URL\x20变化：','恢复播放失败：','pauseResumeDelay','mousedown','use\x20strict','\x20秒，尝试继续播放','auto-course-header','非课程页面','documentElement','querySelector','getMinutes','当前倍速：','checked','getAttribute','auto-course-play','已检测到\x20video\x20元素','value','clientX','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20right:\x2018px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20bottom:\x2018px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20360px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20rgba(20,20,24,.94);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#fff;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-family:\x20Arial,\x20\x22Microsoft\x20YaHei\x22,\x20sans-serif;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2013px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x206px\x2024px\x20rgba(0,0,0,.35);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x202147483647;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20overflow:\x20hidden;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x201px\x20solid\x20rgba(255,255,255,.12);\x0a\x20\x20\x20\x20\x20\x20\x20\x20','auto-course-set-rate','min','视频已结束','2LkADRi','toFixed','finishDelay','display','clientY','block','object','classList','播放器错误','playbackRate','auto-course-next','使用\x20video.play()\x20兜底','auto-course-log','播放器将倍速改成\x20','日志已清空','getBoundingClientRect','currentTime','2265432cDNPPQ','canplay','未找到可用的下一项按钮，重新扫描课程','自动下一项已关闭','下一项已经开始播放','none','收到\x20pause\x20事件，当前位置\x20','已应用播放倍速：','autoCourseBound','scrollTop','playerMaxChecks','启动失败','播放中\x20','getHours','[role=\x22progressbar\x22][aria-valuenow]','全部完成','播放器未找到','disabled','已点击课程节点','xg-player','恢复播放失败：没有找到\x20video','length','dataset','当前不是课程页面','初始化','当前学习内容','error','center','aria-valuenow','ended','5gFoBhQ','54417VIoDop','.xgplayer-icon-play','div','点击下一项后没有正常启动播放器','courseLoadDelay','4ISAfJC','正在进入课程','body','duration','replace','pause','auto-course-panel','addEventListener','stringify','autoCoursePlaybackRate','进度\x20','pointerEvents','autoCourseEnding','准备进入课程：','扫描课程','innerHTML','contains','设置倍速失败：','readyState','change','\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:70px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:4px\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:4px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:1px\x20solid\x20#666;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:#222;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:#fff;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-set-rate\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:4px\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20设置\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-play\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:4px\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20播放\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-next\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:4px\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20下一项\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20align-items:center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20gap:12px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:8px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-auto-resume\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20type=\x22checkbox\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','isFinite','102040gsGEsq','==============================','video','children','664251YxsPNT','手动点击悬浮窗播放按钮','检测到视频到达末尾','padStart','autoNext','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x202px\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-bottom:\x201px\x20solid\x20rgba(255,255,255,.05);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20word-break:\x20break-all;\x0a\x20\x20\x20\x20\x20\x20\x20\x20','自动下一项：','已点击「下一个学习内容」','getItem','playerCheckInterval','nextLoadDelay','.progress\x20.progress_icon.full','smooth','textContent','join','点击\x20xgplayer\x20播放/暂停按钮恢复播放','视频已经结束，不执行恢复播放','hidden','appendChild','removeChild','ratechange','找到未完成课程：','.video_btn.next_video_btn','8663pOWoxT','检测到暂停','等待播放器','max','style','77BGqPYJ','auto-course-clear-log','.xgplayer','auto-course-auto-next','742134eVSMKl','绑定\x20video\x20播放事件','auto-course-body','scrollHeight','autoResume','xg-start.xgplayer-start','maxLogLines','第一个视频需手动点击播放','xg-icon.xgplayer-icon','map','.chapter_tree_node\x20.section_item','点击播放器初始播放按钮','click','auto-course-toggle','视频播放完成：'];_0x5d58=function(){return _0x4a2b58;};return _0x5d58();}(function(_0x29054f,_0x5d653f){const _0x86b4c7=_0x3fe1,_0x49d58f=_0x29054f();while(!![]){try{const _0x1deabb=parseInt(_0x86b4c7(0x11d))/0x1*(parseInt(_0x86b4c7(0x166))/0x2)+parseInt(_0x86b4c7(0xe7))/0x3*(-parseInt(_0x86b4c7(0xec))/0x4)+-parseInt(_0x86b4c7(0xe6))/0x5*(-parseInt(_0x86b4c7(0x126))/0x6)+-parseInt(_0x86b4c7(0x106))/0x7+parseInt(_0x86b4c7(0x177))/0x8+-parseInt(_0x86b4c7(0x138))/0x9+parseInt(_0x86b4c7(0x102))/0xa*(-parseInt(_0x86b4c7(0x122))/0xb);if(_0x1deabb===_0x5d653f)break;else _0x49d58f['push'](_0x49d58f['shift']());}catch(_0x55471a){_0x49d58f['push'](_0x49d58f['shift']());}}}(_0x5d58,0x23607),(function(){const _0x53555e=_0x3fe1;alert(_0x53555e(0x12d)),_0x53555e(0x154);const _0x23b2b3={'initDelay':0x7d0,'courseLoadDelay':0x7d0,'nextLoadDelay':0x9c4,'finishDelay':0x7d0,'playerCheckInterval':0x3e8,'playerMaxChecks':0x1e,'pauseCheckInterval':0xbb8,'pauseResumeDelay':0x4b0,'endThreshold':0.3,'defaultPlaybackRate':0x10,'autoResume':!![],'autoNext':!![],'consoleDebug':!![],'maxLogLines':0x64};let _0x2d8139=![],_0x29ee95=![],_0x528bc2=![],_0x44f0d5='',_0x2b2ecb=Number(localStorage[_0x53555e(0x10e)](_0x53555e(0xf5)))||_0x23b2b3[_0x53555e(0x139)],_0x7ca5d6=location[_0x53555e(0x141)],_0x1fa498=null,_0x3fda28=null,_0x251c18=null,_0x23d85b=null;function _0x15e8c1(_0x30f24f){return new Promise(_0x4d2394=>setTimeout(_0x4d2394,_0x30f24f));}function _0x142553(){const _0x51bbaf=_0x53555e,_0x491ba5=new Date();return[String(_0x491ba5[_0x51bbaf(0xd5)]())[_0x51bbaf(0x109)](0x2,'0'),String(_0x491ba5[_0x51bbaf(0x15a)]())[_0x51bbaf(0x109)](0x2,'0'),String(_0x491ba5[_0x51bbaf(0x14c)]())[_0x51bbaf(0x109)](0x2,'0')][_0x51bbaf(0x114)](':');}function _0xe4c53c(..._0x173f29){const _0x4db1e2=_0x53555e,_0x3ad350=_0x173f29[_0x4db1e2(0x12f)](_0x46e4bd=>{const _0x564861=_0x4db1e2;if(typeof _0x46e4bd===_0x564861(0x16c))try{return JSON[_0x564861(0xf4)](_0x46e4bd);}catch{return String(_0x46e4bd);}return String(_0x46e4bd);})[_0x4db1e2(0x114)]('\x20');_0x23b2b3['consoleDebug']&&console[_0x4db1e2(0x148)]('%c[自动学习]',_0x4db1e2(0x14e),_0x3ad350);if(!_0x3fda28)return;const _0xe1eb70=document['createElement'](_0x4db1e2(0xe9));_0xe1eb70[_0x4db1e2(0x121)]['cssText']=_0x4db1e2(0x10b),_0xe1eb70['textContent']='['+_0x142553()+']\x20'+_0x3ad350,_0x3fda28[_0x4db1e2(0x118)](_0xe1eb70);while(_0x3fda28[_0x4db1e2(0x105)][_0x4db1e2(0xdd)]>_0x23b2b3[_0x4db1e2(0x12c)]){_0x3fda28[_0x4db1e2(0x119)](_0x3fda28['firstChild']);}_0x3fda28[_0x4db1e2(0xd1)]=_0x3fda28[_0x4db1e2(0x129)];}function _0x4ec1ea(_0x544d58){_0x251c18&&(_0x251c18['textContent']=_0x544d58);}function _0x145b56(){const _0x5d9b68=_0x53555e;if(document[_0x5d9b68(0x14d)]('auto-course-panel'))return;_0x1fa498=document['createElement']('div'),_0x1fa498['id']=_0x5d9b68(0xf2),_0x1fa498[_0x5d9b68(0x121)]['cssText']=_0x5d9b68(0x162),_0x1fa498[_0x5d9b68(0xfb)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-header\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:10px\x2012px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:rgba(64,158,255,.25);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-weight:bold;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:move;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20user-select:none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20align-items:center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20justify-content:space-between;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>课程自动播放助手\x20by\x20MrCloud</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-toggle\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:0\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:16px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20−\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-body\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:10px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:8px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20align-items:center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20gap:6px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20flex-wrap:wrap;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>状态：</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-status\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:#67c23a;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-weight:bold;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20启动中\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20align-items:center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20gap:6px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:8px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20flex-wrap:wrap;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20倍速：（此处最高设置为16x）\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</label>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-rate\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20type=\x22number\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20min=\x220.25\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max=\x22128\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20step=\x220.25\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20value=\x22'+_0x2b2ecb+_0x5d9b68(0x100)+(_0x23b2b3[_0x5d9b68(0x12a)]?'checked':'')+_0x5d9b68(0x14a)+(_0x23b2b3[_0x5d9b68(0x10a)]?'checked':'')+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20自动下一项\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</label>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:5px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:#bbb;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20运行日志\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-log\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:180px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20overflow:auto;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:#111;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:5px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:7px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-family:Consolas,\x20monospace;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:12px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20line-height:1.45;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20></div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-top:7px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20gap:6px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20id=\x22auto-course-clear-log\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:3px\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20清空日志\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',document[_0x5d9b68(0xee)][_0x5d9b68(0x118)](_0x1fa498),_0x3fda28=document[_0x5d9b68(0x14d)](_0x5d9b68(0x172)),_0x251c18=document[_0x5d9b68(0x14d)]('auto-course-status'),_0x23d85b=document[_0x5d9b68(0x14d)]('auto-course-rate'),document[_0x5d9b68(0x14d)](_0x5d9b68(0x163))[_0x5d9b68(0xf3)](_0x5d9b68(0x132),()=>{const _0xc0600=_0x5d9b68;let _0x2a50dd=Number(_0x23d85b['value']);if(!Number[_0xc0600(0x101)](_0x2a50dd))return;_0x2a50dd=Math[_0xc0600(0x120)](0.25,Math[_0xc0600(0x164)](0x10,_0x2a50dd)),_0x2b2ecb=_0x2a50dd,_0x23d85b[_0xc0600(0x160)]=String(_0x2a50dd),localStorage[_0xc0600(0x145)](_0xc0600(0xf5),String(_0x2a50dd)),_0xb454e3(),_0xe4c53c(_0xc0600(0x143)+_0x2a50dd+'x');}),document[_0x5d9b68(0x14d)](_0x5d9b68(0x15e))[_0x5d9b68(0xf3)](_0x5d9b68(0x132),async()=>{const _0x3105b8=_0x5d9b68;_0xe4c53c(_0x3105b8(0x107)),await _0x501d8b();}),document[_0x5d9b68(0x14d)](_0x5d9b68(0x170))[_0x5d9b68(0xf3)](_0x5d9b68(0x132),async()=>{_0xe4c53c('手动执行下一学习内容'),await _0xf6d42f();}),document[_0x5d9b68(0x14d)](_0x5d9b68(0x13f))[_0x5d9b68(0xf3)]('change',_0x26ddce=>{const _0xa1e3=_0x5d9b68;_0x23b2b3[_0xa1e3(0x12a)]=_0x26ddce[_0xa1e3(0x137)][_0xa1e3(0x15c)],_0xe4c53c('暂停自动继续：'+(_0x23b2b3['autoResume']?'开启':'关闭'));}),document[_0x5d9b68(0x14d)](_0x5d9b68(0x125))[_0x5d9b68(0xf3)](_0x5d9b68(0xff),_0x5953a5=>{const _0x5612a7=_0x5d9b68;_0x23b2b3[_0x5612a7(0x10a)]=_0x5953a5[_0x5612a7(0x137)]['checked'],_0xe4c53c(_0x5612a7(0x10c)+(_0x23b2b3[_0x5612a7(0x10a)]?'开启':'关闭'));}),document[_0x5d9b68(0x14d)](_0x5d9b68(0x123))[_0x5d9b68(0xf3)](_0x5d9b68(0x132),()=>{const _0x1d1faf=_0x5d9b68;_0x3fda28[_0x1d1faf(0xfb)]='',_0xe4c53c(_0x1d1faf(0x174));});const _0x42f205=document['getElementById'](_0x5d9b68(0x133)),_0x5553be=document[_0x5d9b68(0x14d)](_0x5d9b68(0x128));_0x42f205['addEventListener'](_0x5d9b68(0x132),()=>{const _0x41afc5=_0x5d9b68,_0x27ff8=_0x5553be[_0x41afc5(0x121)]['display']===_0x41afc5(0x17c);_0x5553be[_0x41afc5(0x121)][_0x41afc5(0x169)]=_0x27ff8?_0x41afc5(0x16b):_0x41afc5(0x17c),_0x42f205[_0x41afc5(0x113)]=_0x27ff8?'−':'+';}),_0x4ebf36();}function _0x4ebf36(){const _0x5ea548=_0x53555e,_0x12e5eb=document[_0x5ea548(0x14d)](_0x5ea548(0x156));if(!_0x12e5eb||!_0x1fa498)return;let _0x5808d0=![],_0x2c86d4=0x0,_0x232448=0x0;_0x12e5eb['addEventListener'](_0x5ea548(0x153),_0x49278d=>{const _0x4fbd99=_0x5ea548;if(_0x49278d[_0x4fbd99(0x137)]['id']===_0x4fbd99(0x133))return;_0x5808d0=!![];const _0x336d7b=_0x1fa498[_0x4fbd99(0x175)]();_0x2c86d4=_0x49278d[_0x4fbd99(0x161)]-_0x336d7b['left'],_0x232448=_0x49278d[_0x4fbd99(0x16a)]-_0x336d7b[_0x4fbd99(0x13d)],_0x1fa498[_0x4fbd99(0x121)]['right']=_0x4fbd99(0x13c),_0x1fa498['style']['bottom']=_0x4fbd99(0x13c);}),document[_0x5ea548(0xf3)]('mousemove',_0x3b08e0=>{const _0x7e8f9=_0x5ea548;if(!_0x5808d0)return;_0x1fa498[_0x7e8f9(0x121)]['left']=_0x3b08e0[_0x7e8f9(0x161)]-_0x2c86d4+'px',_0x1fa498[_0x7e8f9(0x121)]['top']=_0x3b08e0['clientY']-_0x232448+'px';}),document[_0x5ea548(0xf3)]('mouseup',()=>{_0x5808d0=![];});}function _0x1491b0(){return location['pathname']['startsWith']('/learn/course');}function _0x345182(){const _0x225547=_0x53555e;return[...document['querySelectorAll'](_0x225547(0x130))];}function _0x3817ae(_0x1ec3b3){const _0x34f925=_0x53555e,_0x1d7251=_0x1ec3b3[_0x34f925(0x159)]('.course_name');if(!_0x1d7251)return'未知课程';return _0x1d7251[_0x34f925(0x113)]['trim']()[_0x34f925(0xf0)](/\s+/g,'\x20');}function _0x31cb35(_0x254e61){const _0x5a9d10=_0x53555e;if(_0x254e61['querySelector'](_0x5a9d10(0x111)))return!![];const _0x5164af=_0x254e61['querySelector'](_0x5a9d10(0xd6));if(_0x5164af){const _0xba9d9a=Number(_0x5164af[_0x5a9d10(0x15d)]('aria-valuenow'));if(_0xba9d9a>=0x64)return!![];}return![];}function _0x5a15c3(_0x29563a){const _0x3f1f9b=_0x53555e;if(_0x31cb35(_0x29563a))return 0x64;const _0x1ce355=_0x29563a[_0x3f1f9b(0x159)](_0x3f1f9b(0xd6));if(!_0x1ce355)return 0x0;return Number(_0x1ce355['getAttribute'](_0x3f1f9b(0xe4)))||0x0;}function _0xee5a40(){const _0x574d4d=_0x53555e,_0x58db0d=_0x345182();_0xe4c53c(_0x574d4d(0x13e)+_0x58db0d[_0x574d4d(0xdd)]+'\x20项');for(let _0x2ce72b=0x0;_0x2ce72b<_0x58db0d['length'];_0x2ce72b++){const _0x26775d=_0x58db0d[_0x2ce72b],_0x5c8ae1=_0x3817ae(_0x26775d),_0x5cd554=_0x5a15c3(_0x26775d);_0xe4c53c(_0x2ce72b+0x1+'/'+_0x58db0d[_0x574d4d(0xdd)],_0x5c8ae1,_0x574d4d(0xf6)+_0x5cd554+'%');if(!_0x31cb35(_0x26775d))return _0xe4c53c(_0x574d4d(0x11b)+_0x5c8ae1),_0x26775d;}return null;}function _0x49263b(){const _0x55fc34=_0x53555e;return document[_0x55fc34(0x159)](_0x55fc34(0xdb))||document['querySelector'](_0x55fc34(0x124));}function _0x1054fa(){const _0x5cc82d=_0x53555e,_0x6d5015=_0x49263b();if(_0x6d5015){const _0x29c8af=_0x6d5015['querySelector'](_0x5cc82d(0x104));if(_0x29c8af)return _0x29c8af;}return document[_0x5cc82d(0x159)]('video');}function _0x135429(){const _0x477f23=_0x53555e,_0x5d9a37=_0x49263b();if(!_0x5d9a37)return null;return _0x5d9a37[_0x477f23(0x159)](_0x477f23(0x12b))||_0x5d9a37['querySelector'](_0x477f23(0x146));}function _0x4ebc56(){const _0x3c4741=_0x53555e,_0x31c6a2=_0x49263b();if(!_0x31c6a2)return null;const _0x1dfb7d=[..._0x31c6a2['querySelectorAll'](_0x3c4741(0x12e))];for(const _0x45c459 of _0x1dfb7d){if(_0x45c459[_0x3c4741(0x159)](_0x3c4741(0xe8))&&_0x45c459[_0x3c4741(0x159)]('.xgplayer-icon-pause'))return _0x45c459;}return null;}function _0x5f087a(){const _0x231faf=_0x53555e,_0x4d993c=document[_0x231faf(0x159)](_0x231faf(0x11c));if(!_0x4d993c)return null;const _0x37861f=getComputedStyle(_0x4d993c);if(_0x37861f[_0x231faf(0x169)]===_0x231faf(0x17c)||_0x37861f['visibility']===_0x231faf(0x117)||_0x37861f[_0x231faf(0xf7)]===_0x231faf(0x17c))return null;if(_0x4d993c[_0x231faf(0x16d)][_0x231faf(0xfc)](_0x231faf(0xd9)))return null;return _0x4d993c;}function _0xb454e3(_0x13b865=_0x1054fa()){const _0x479dd0=_0x53555e;if(!_0x13b865)return![];try{return _0x13b865[_0x479dd0(0x16f)]=_0x2b2ecb,_0x13b865[_0x479dd0(0x139)]=_0x2b2ecb,_0xe4c53c(_0x479dd0(0xcf)+_0x2b2ecb+'x'),!![];}catch(_0x522af4){return _0xe4c53c(_0x479dd0(0xfd),_0x522af4),![];}}async function _0x501d8b(){const _0x40a1c1=_0x53555e,_0xe8b5be=_0x1054fa();if(!_0xe8b5be)return _0xe4c53c(_0x40a1c1(0xdc)),![];if(_0xe8b5be[_0x40a1c1(0xe5)])return _0xe4c53c(_0x40a1c1(0x116)),![];_0xb454e3(_0xe8b5be);if(!_0xe8b5be[_0x40a1c1(0x136)])return _0xe4c53c(_0x40a1c1(0x144)),!![];if(_0xe8b5be['currentTime']>0x0){const _0x5d7c36=_0x4ebc56();if(_0x5d7c36){_0xe4c53c(_0x40a1c1(0x115)),_0x5d7c36[_0x40a1c1(0x132)](),await _0x15e8c1(0x258);if(!_0xe8b5be[_0x40a1c1(0x136)])return _0xb454e3(_0xe8b5be),!![];}}const _0x249c8b=_0x135429();if(_0x249c8b&&_0xe8b5be[_0x40a1c1(0x176)]<=0x0){_0xe4c53c(_0x40a1c1(0x131)),_0x249c8b[_0x40a1c1(0x132)](),await _0x15e8c1(0x258);if(!_0xe8b5be[_0x40a1c1(0x136)])return _0xb454e3(_0xe8b5be),!![];}try{return _0xe4c53c(_0x40a1c1(0x171)),await _0xe8b5be[_0x40a1c1(0x142)](),_0xb454e3(_0xe8b5be),!![];}catch(_0x3ba087){return _0xe4c53c(_0x40a1c1(0x151),_0x3ba087),![];}}async function _0xda7851(){const _0x21f7cc=_0x53555e;if(!_0x23b2b3[_0x21f7cc(0x12a)]||_0x528bc2||_0x29ee95)return;const _0x4d65d6=_0x1054fa();if(!_0x4d65d6)return;if(_0x4d65d6[_0x21f7cc(0xe5)]||_0x4d65d6['dataset'][_0x21f7cc(0xf8)]==='1')return;if(_0x4d65d6[_0x21f7cc(0xfe)]<0x2)return;if(!_0x4d65d6['paused'])return;if(_0x4d65d6[_0x21f7cc(0x176)]<=0x0)return;_0x528bc2=!![],_0xe4c53c('检测到暂停，当前位置\x20'+_0x4d65d6[_0x21f7cc(0x176)][_0x21f7cc(0x167)](0x1)+_0x21f7cc(0x155)),await _0x501d8b(),_0x528bc2=![];}async function _0x13e212(){const _0x2b1f9f=_0x53555e;_0x4ec1ea(_0x2b1f9f(0x11f)),_0xe4c53c(_0x2b1f9f(0x14f));for(let _0x1b9d9c=0x0;_0x1b9d9c<_0x23b2b3[_0x2b1f9f(0xd2)];_0x1b9d9c++){const _0x1f06a7=_0x1054fa();if(_0x1f06a7){_0xe4c53c(_0x2b1f9f(0x15f)),_0xfa36cf(_0x1f06a7),_0xb454e3(_0x1f06a7);if(!_0x1f06a7[_0x2b1f9f(0x136)]&&!_0x1f06a7[_0x2b1f9f(0xe5)])return _0x4ec1ea(_0x2b1f9f(0xd4)+_0x2b2ecb+'x'),!![];const _0x2eb870=await _0x501d8b();if(_0x2eb870)return _0x4ec1ea(_0x2b1f9f(0xd4)+_0x2b2ecb+'x'),!![];}await _0x15e8c1(_0x23b2b3[_0x2b1f9f(0x10f)]);}return _0x4ec1ea(_0x2b1f9f(0xd8)),_0xe4c53c('等待播放器超时'),![];}async function _0x57fa13(_0x200fbd){const _0x4fa294=_0x53555e;if(!_0x200fbd)return![];return _0x44f0d5=_0x3817ae(_0x200fbd),_0x4ec1ea(_0x4fa294(0xed)),_0xe4c53c(_0x4fa294(0xf9)+_0x44f0d5),_0x200fbd['scrollIntoView']({'behavior':_0x4fa294(0x112),'block':_0x4fa294(0xe3)}),await _0x15e8c1(0x1f4),_0x200fbd[_0x4fa294(0x132)](),_0xe4c53c(_0x4fa294(0xda)),await _0x15e8c1(_0x23b2b3[_0x4fa294(0xeb)]),await _0x13e212();}async function _0x44c99e(_0x5f215a){const _0x2e790b=_0x53555e;if(_0x5f215a[_0x2e790b(0xde)]['autoCourseEnding']==='1')return;_0x5f215a[_0x2e790b(0xde)][_0x2e790b(0xf8)]='1';if(_0x29ee95)return;_0x29ee95=!![],_0x4ec1ea(_0x2e790b(0x165)),_0xe4c53c(_0x2e790b(0x134)+(_0x44f0d5||_0x2e790b(0xe1))),await _0x15e8c1(_0x23b2b3[_0x2e790b(0x168)]),_0x23b2b3[_0x2e790b(0x10a)]?await _0xf6d42f():(_0xe4c53c(_0x2e790b(0x17a)),_0x4ec1ea(_0x2e790b(0x149))),_0x29ee95=![];}async function _0xf6d42f(){const _0x52cc00=_0x53555e,_0x26c955=_0x5f087a();if(_0x26c955){_0xe4c53c('找到「下一个学习内容」按钮'),_0x4ec1ea('切换下一项'),_0x26c955[_0x52cc00(0x13b)]({'behavior':'smooth','block':_0x52cc00(0xe3)}),await _0x15e8c1(0x12c),_0x26c955[_0x52cc00(0x132)](),_0xe4c53c(_0x52cc00(0x10d)),await _0x15e8c1(_0x23b2b3[_0x52cc00(0x110)]);const _0xb963be=await _0x13e212();if(_0xb963be)return _0xe4c53c(_0x52cc00(0x17b)),!![];_0xe4c53c(_0x52cc00(0xea));}return _0xe4c53c(_0x52cc00(0x179)),_0x2d8139=![],await _0x15e8c1(0x3e8),await _0x5d3a1a(),![];}function _0xfa36cf(_0x4078de){const _0x3a3ad2=_0x53555e;if(!_0x4078de)return;if(_0x4078de[_0x3a3ad2(0xde)][_0x3a3ad2(0xd0)]==='1')return;_0x4078de['dataset'][_0x3a3ad2(0xd0)]='1',_0x4078de[_0x3a3ad2(0xde)]['autoCourseEnding']='0',_0xe4c53c(_0x3a3ad2(0x127)),_0x4078de['addEventListener']('loadedmetadata',()=>{const _0x3d0fb2=_0x3a3ad2;_0xe4c53c('视频信息：时长\x20'+(Number['isFinite'](_0x4078de[_0x3d0fb2(0xef)])?_0x4078de[_0x3d0fb2(0xef)][_0x3d0fb2(0x167)](0x1):'?')+'\x20秒'),_0xb454e3(_0x4078de);}),_0x4078de[_0x3a3ad2(0xf3)](_0x3a3ad2(0x178),()=>{_0xb454e3(_0x4078de);}),_0x4078de[_0x3a3ad2(0xf3)](_0x3a3ad2(0x11a),()=>{const _0x4eaa52=_0x3a3ad2;Math['abs'](_0x4078de[_0x4eaa52(0x16f)]-_0x2b2ecb)>0.01&&(_0xe4c53c(_0x4eaa52(0x173)+_0x4078de[_0x4eaa52(0x16f)]+_0x4eaa52(0x147)+_0x2b2ecb+'x'),setTimeout(()=>{const _0x2e384e=_0x4eaa52;_0x1054fa()===_0x4078de&&(_0x4078de[_0x2e384e(0x16f)]=_0x2b2ecb);},0x64));}),_0x4078de[_0x3a3ad2(0xf3)](_0x3a3ad2(0x142),()=>{const _0x9f402f=_0x3a3ad2;_0x4078de['dataset'][_0x9f402f(0xf8)]='0',_0xb454e3(_0x4078de),_0x4ec1ea('播放中\x20'+_0x2b2ecb+'x'),_0xe4c53c('开始播放，当前位置\x20'+_0x4078de['currentTime'][_0x9f402f(0x167)](0x1)+'\x20秒');}),_0x4078de[_0x3a3ad2(0xf3)](_0x3a3ad2(0xf1),async()=>{const _0x3b7b76=_0x3a3ad2;if(_0x4078de[_0x3b7b76(0xe5)]||_0x4078de[_0x3b7b76(0xde)]['autoCourseEnding']==='1')return;_0x4ec1ea(_0x3b7b76(0x11e)),_0xe4c53c(_0x3b7b76(0x17d)+_0x4078de[_0x3b7b76(0x176)]['toFixed'](0x1)+'\x20秒');if(!_0x23b2b3[_0x3b7b76(0x12a)])return;await _0x15e8c1(_0x23b2b3[_0x3b7b76(0x152)]),_0x4078de[_0x3b7b76(0x136)]&&!_0x4078de[_0x3b7b76(0xe5)]&&await _0xda7851();}),_0x4078de[_0x3a3ad2(0xf3)]('ended',async()=>{_0xe4c53c('收到\x20ended\x20事件'),await _0x44c99e(_0x4078de);}),_0x4078de[_0x3a3ad2(0xf3)]('timeupdate',async()=>{const _0x52fba7=_0x3a3ad2;if(!_0x4078de[_0x52fba7(0xef)]||!Number[_0x52fba7(0x101)](_0x4078de[_0x52fba7(0xef)]))return;if(_0x4078de['currentTime']<=0x0)return;const _0x25d952=_0x4078de['duration']-_0x4078de[_0x52fba7(0x176)];_0x25d952<=_0x23b2b3['endThreshold']&&(_0xe4c53c(_0x52fba7(0x108)),await _0x44c99e(_0x4078de));}),_0x4078de['addEventListener'](_0x3a3ad2(0xe2),()=>{const _0x5b86e5=_0x3a3ad2;_0x4ec1ea(_0x5b86e5(0x16e)),_0xe4c53c('video\x20播放错误',_0x4078de['error']||'');});}async function _0x5d3a1a(){const _0x14773a=_0x53555e;if(_0x2d8139)return;if(!_0x1491b0())return;_0x2d8139=!![],_0x4ec1ea(_0x14773a(0xfa)),_0xe4c53c(_0x14773a(0x135)),await _0x15e8c1(0x3e8);const _0x228fe9=_0xee5a40();if(!_0x228fe9){_0xe4c53c('没有发现未完成课程'),_0x4ec1ea(_0x14773a(0xd7)),_0x2d8139=![];return;}const _0x5e579d=await _0x57fa13(_0x228fe9);!_0x5e579d&&(_0xe4c53c(_0x14773a(0x14b)),_0x4ec1ea(_0x14773a(0xd3))),_0x2d8139=![];}const _0x3a0f2e=new MutationObserver(()=>{const _0x6105f=_0x53555e,_0x66ead0=_0x1054fa();if(!_0x66ead0)return;_0x66ead0['dataset'][_0x6105f(0xd0)]!=='1'&&(_0xe4c53c('检测到新的\x20video'),_0xfa36cf(_0x66ead0),_0xb454e3(_0x66ead0));});setInterval(async()=>{const _0x1bfae0=_0x53555e;if(!_0x23b2b3[_0x1bfae0(0x12a)])return;const _0x4acdcb=_0x1054fa();if(!_0x4acdcb)return;_0x4acdcb['currentTime']>0x0&&_0x4acdcb[_0x1bfae0(0x136)]&&!_0x4acdcb[_0x1bfae0(0xe5)]&&_0x4acdcb['dataset'][_0x1bfae0(0xf8)]!=='1'&&await _0xda7851();},_0x23b2b3['pauseCheckInterval']),setInterval(async()=>{const _0x4eb419=_0x53555e;if(location[_0x4eb419(0x141)]===_0x7ca5d6)return;_0x7ca5d6=location[_0x4eb419(0x141)],_0xe4c53c(_0x4eb419(0x150)+_0x7ca5d6),await _0x15e8c1(0x320);const _0x429957=_0x1054fa();_0x429957&&(_0xfa36cf(_0x429957),_0xb454e3(_0x429957));},0x3e8);async function _0x33068f(){const _0x307064=_0x53555e;_0x145b56(),_0xe4c53c(_0x307064(0x103)),_0xe4c53c(_0x307064(0x13a)),_0xe4c53c(_0x307064(0x15b)+_0x2b2ecb+'x'),_0xe4c53c(_0x307064(0x103)),_0x4ec1ea(_0x307064(0xe0));if(!_0x1491b0()){_0x4ec1ea(_0x307064(0x157)),_0xe4c53c(_0x307064(0xdf));return;}_0x3a0f2e['observe'](document[_0x307064(0x158)],{'childList':!![],'subtree':!![]}),await _0x15e8c1(_0x23b2b3[_0x307064(0x140)]);const _0x327e4a=_0x1054fa();if(_0x327e4a){_0xe4c53c('页面已经存在播放器'),_0xfa36cf(_0x327e4a),_0xb454e3(_0x327e4a),await _0x13e212();return;}await _0x5d3a1a();}_0x33068f();}()));
+
+
+    alert('第一个视频需手动点击播放');
+
+
+    /******************************************************************
+     * 配置
+     ******************************************************************/
+
+    const CONFIG = {
+
+        // 初始化等待
+        initDelay: 2000,
+
+        // 点击课程后等待
+        courseLoadDelay: 2000,
+
+        // 点击下一项以后等待
+        nextLoadDelay: 2500,
+
+        // 视频结束后等待服务器保存进度
+        finishDelay: 2000,
+
+        // 查找播放器间隔
+        playerCheckInterval: 1000,
+
+        // 最多查找播放器次数
+        playerMaxChecks: 30,
+
+        // 暂停状态检查间隔
+        pauseCheckInterval: 3000,
+
+        // pause 后等待多久再恢复
+        pauseResumeDelay: 1200,
+
+        // 视频最后多少秒视为结束
+        endThreshold: 0.3,
+
+        // 默认实际播放倍速
+        defaultPlaybackRate: 16,
+
+        // 最大倍速
+        maxPlaybackRate: 16,
+
+        // 最低倍速
+        minPlaybackRate: 0.25,
+
+        // 暂停以后自动继续
+        autoResume: true,
+
+        // 播放完成以后自动下一项
+        autoNext: true,
+
+        // 控制台日志
+        consoleDebug: true,
+
+        // 悬浮窗最大日志数量
+        maxLogLines: 150,
+
+        // LearnTime URL 关键词
+        learnTimeKeyword: 'learntime',
+
+        // 测试服务器收到的 doubleSpeed
+        reportDoubleSpeed: 1
+    };
+
+
+    /******************************************************************
+     * 状态
+     ******************************************************************/
+
+    let working = false;
+    let switching = false;
+    let autoResumeBusy = false;
+
+    let currentCourseName = '';
+
+    let playbackRate =
+        Number(
+            localStorage.getItem(
+                'autoCoursePlaybackRate'
+            )
+        ) || CONFIG.defaultPlaybackRate;
+
+    // 防止保存了大于当前限制的旧数据
+    playbackRate = Math.max(
+        CONFIG.minPlaybackRate,
+        Math.min(
+            CONFIG.maxPlaybackRate,
+            playbackRate
+        )
+    );
+
+    let oldUrl = location.href;
+
+    let panel = null;
+    let logBox = null;
+    let statusText = null;
+    let rateInput = null;
+
+    let reportDoubleSpeed =
+      Number(
+          localStorage.getItem(
+              'autoCourseReportDoubleSpeed'
+          )
+      ) || CONFIG.reportDoubleSpeed;
+
+    /*
+     * document.body / 悬浮窗创建前产生的日志
+     * 先保存起来。
+     */
+    const pendingLogs = [];
+
+
+    /******************************************************************
+     * 基础工具
+     ******************************************************************/
+
+    function sleep(ms) {
+        return new Promise(
+            resolve => setTimeout(resolve, ms)
+        );
+    }
+
+
+    function getTime() {
+
+        const date = new Date();
+
+        return [
+            String(
+                date.getHours()
+            ).padStart(2, '0'),
+
+            String(
+                date.getMinutes()
+            ).padStart(2, '0'),
+
+            String(
+                date.getSeconds()
+            ).padStart(2, '0')
+
+        ].join(':');
+    }
+
+
+    function addLogLine(
+        time,
+        text
+    ) {
+
+        if (!logBox) {
+            return;
+        }
+
+        const line =
+            document.createElement('div');
+
+        line.style.cssText = `
+            padding:3px 0;
+            border-bottom:1px solid rgba(255,255,255,.06);
+            word-break:break-all;
+        `;
+
+        line.textContent =
+            `[${time}] ${text}`;
+
+        logBox.appendChild(line);
+
+
+        while (
+            logBox.children.length >
+            CONFIG.maxLogLines
+        ) {
+            logBox.removeChild(
+                logBox.firstChild
+            );
+        }
+
+
+        logBox.scrollTop =
+            logBox.scrollHeight;
+    }
+
+
+    function log(...args) {
+
+        const text = args
+            .map(item => {
+
+                if (
+                    typeof item === 'object'
+                ) {
+
+                    try {
+                        return JSON.stringify(
+                            item
+                        );
+                    } catch {
+                        return String(item);
+                    }
+                }
+
+                return String(item);
+            })
+            .join(' ');
+
+
+        if (
+            CONFIG.consoleDebug
+        ) {
+
+            console.log(
+                '%c[自动学习]',
+                'color:#409EFF;font-weight:bold;',
+                text
+            );
+        }
+
+
+        const time = getTime();
+
+
+        /*
+         * 悬浮窗还没建立
+         */
+        if (!logBox) {
+
+            pendingLogs.push({
+                time,
+                text
+            });
+
+
+            if (
+                pendingLogs.length >
+                CONFIG.maxLogLines
+            ) {
+                pendingLogs.shift();
+            }
+
+            return;
+        }
+
+
+        addLogLine(
+            time,
+            text
+        );
+    }
+
+
+    function flushPendingLogs() {
+
+        if (!logBox) {
+            return;
+        }
+
+
+        for (
+            const item of pendingLogs
+        ) {
+
+            addLogLine(
+                item.time,
+                item.text
+            );
+        }
+
+        pendingLogs.length = 0;
+    }
+
+
+    function setStatus(text) {
+
+        if (statusText) {
+            statusText.textContent = text;
+        }
+    }
+
+
+    /******************************************************************
+     * LearnTime body 修改
+     *
+     * 用于你自己的测试服务器。
+     *
+     * 实际播放器：
+     *
+     * video.playbackRate = playbackRate
+     *
+     * 测试请求：
+     *
+     * doubleSpeed = 1
+     ******************************************************************/
+
+    function rewriteLearnTimeBody(
+        body
+    ) {
+
+        if (
+            typeof body !== 'string'
+        ) {
+            return body;
+        }
+
+
+        try {
+
+            const data =
+                JSON.parse(body);
+
+
+            if (
+                data &&
+                typeof data ===
+                    'object' &&
+                'doubleSpeed' in data
+            ) {
+
+                const oldValue =
+                    data.doubleSpeed;
+
+
+                data.doubleSpeed =
+                    reportDoubleSpeed;
+
+
+                log(
+                  `上传速率已经改为${reportDoubleSpeed}（doubleSpeed: ${oldValue} -> ${reportDoubleSpeed}）`
+              );
+
+
+                return JSON.stringify(
+                    data
+                );
+            }
+
+        } catch (error) {
+
+            log(
+                'learntime body 不是 JSON，跳过修改'
+            );
+        }
+
+
+        return body;
+    }
+
+
+    /******************************************************************
+     * XHR 拦截
+     ******************************************************************/
+
+    const rawXhrOpen =
+        XMLHttpRequest.prototype.open;
+
+    const rawXhrSend =
+        XMLHttpRequest.prototype.send;
+
+
+    XMLHttpRequest.prototype.open =
+        function (
+            method,
+            url,
+            ...rest
+        ) {
+
+            this.__courseMethod =
+                method;
+
+            this.__courseUrl =
+                url;
+
+
+            return rawXhrOpen.call(
+                this,
+                method,
+                url,
+                ...rest
+            );
+        };
+
+
+    XMLHttpRequest.prototype.send =
+        function (body) {
+
+            const url =
+                String(
+                    this.__courseUrl ||
+                    ''
+                );
+
+            const method =
+                String(
+                    this.__courseMethod ||
+                    ''
+                ).toUpperCase();
+
+
+            if (
+                method === 'POST' &&
+                url.includes(
+                    CONFIG.learnTimeKeyword
+                )
+            ) {
+
+                const newBody =
+                    rewriteLearnTimeBody(
+                        body
+                    );
+
+
+                log(
+                    `XHR 命中 learntime：${url}`
+                );
+
+
+                this.addEventListener(
+                    'load',
+                    function () {
+
+                        log(
+                            `learntime XHR 返回状态：${this.status}`
+                        );
+                    }
+                );
+
+
+                return rawXhrSend.call(
+                    this,
+                    newBody
+                );
+            }
+
+
+            return rawXhrSend.call(
+                this,
+                body
+            );
+        };
+
+
+    /******************************************************************
+     * fetch 拦截
+     ******************************************************************/
+
+    const rawFetch =
+        window.fetch;
+
+
+    if (rawFetch) {
+
+        window.fetch =
+            function (
+                input,
+                init = {}
+            ) {
+
+                const url =
+                    typeof input ===
+                    'string'
+                        ? input
+                        : input?.url || '';
+
+
+                const method =
+                    String(
+                        init?.method ||
+                        'GET'
+                    ).toUpperCase();
+
+
+                if (
+                    method === 'POST' &&
+                    String(url).includes(
+                        CONFIG.learnTimeKeyword
+                    )
+                ) {
+
+                    const newInit = {
+                        ...init
+                    };
+
+
+                    newInit.body =
+                        rewriteLearnTimeBody(
+                            init?.body
+                        );
+
+
+                    log(
+                        `fetch 命中 learntime：${url}`
+                    );
+
+
+                    return rawFetch.call(
+                        this,
+                        input,
+                        newInit
+                    ).then(
+                        response => {
+
+                            log(
+                                `learntime fetch 返回状态：${response.status}`
+                            );
+
+                            return response;
+                        }
+                    );
+                }
+
+
+                return rawFetch.apply(
+                    this,
+                    arguments
+                );
+            };
+    }
+
+
+    /******************************************************************
+     * 创建悬浮窗
+     ******************************************************************/
+
+    function createFloatingPanel() {
+
+        if (
+            document.getElementById(
+                'auto-course-panel'
+            )
+        ) {
+            return;
+        }
+
+
+        panel =
+            document.createElement(
+                'div'
+            );
+
+
+        panel.id =
+            'auto-course-panel';
+
+
+        panel.style.cssText = `
+            position:fixed;
+            right:18px;
+            bottom:18px;
+            width:380px;
+            background:rgba(20,20,24,.95);
+            color:#fff;
+            font-family:Arial,"Microsoft YaHei",sans-serif;
+            font-size:13px;
+            border-radius:10px;
+            box-shadow:0 6px 24px rgba(0,0,0,.4);
+            z-index:2147483647;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,.15);
+        `;
+
+
+        panel.innerHTML = `
+
+            <div
+                id="auto-course-header"
+                style="
+                    padding:10px 12px;
+                    background:rgba(64,158,255,.28);
+                    font-weight:bold;
+                    cursor:move;
+                    user-select:none;
+                    display:flex;
+                    align-items:center;
+                    justify-content:space-between;
+                "
+            >
+
+                <span>
+                    课程自动播放助手 by MrCloud
+                </span>
+
+                <span
+                    id="auto-course-toggle"
+                    style="
+                        cursor:pointer;
+                        font-size:18px;
+                        padding:0 5px;
+                    "
+                >
+                    −
+                </span>
+
+            </div>
+
+
+            <div
+                id="auto-course-body"
+                style="
+                    padding:10px;
+                "
+            >
+
+
+                <div
+                    style="
+                        margin-bottom:8px;
+                    "
+                >
+
+                    状态：
+
+                    <span
+                        id="auto-course-status"
+                        style="
+                            color:#67c23a;
+                            font-weight:bold;
+                        "
+                    >
+                        启动中
+                    </span>
+
+                </div>
+
+
+                <div
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:6px;
+                        flex-wrap:wrap;
+                        margin-bottom:8px;
+                    "
+                >
+
+                    <label>
+                        倍速：
+                    </label>
+
+
+                    <input
+                        id="auto-course-rate"
+                        type="number"
+                        min="${CONFIG.minPlaybackRate}"
+                        max="${CONFIG.maxPlaybackRate}"
+                        step="0.25"
+                        value="${playbackRate}"
+                        style="
+                            width:70px;
+                            padding:4px 5px;
+                            border:1px solid #666;
+                            border-radius:4px;
+                            background:#222;
+                            color:#fff;
+                        "
+                    >
+
+
+                    <button
+                        id="auto-course-set-rate"
+                        style="
+                            cursor:pointer;
+                            padding:4px 8px;
+                        "
+                    >
+                        设置
+                    </button>
+
+
+                    <button
+                        id="auto-course-play"
+                        style="
+                            cursor:pointer;
+                            padding:4px 8px;
+                        "
+                    >
+                        播放
+                    </button>
+
+
+                    <button
+                        id="auto-course-next"
+                        style="
+                            cursor:pointer;
+                            padding:4px 8px;
+                        "
+                    >
+                        下一项
+                    </button>
+
+                </div>
+
+
+                <div
+                  style="
+                      display:flex;
+                      align-items:center;
+                      gap:6px;
+                      flex-wrap:wrap;
+                      margin-bottom:8px;
+                  "
+              >
+
+                  <label>
+                      上传服务器的倍速：
+                  </label>
+
+                  <input
+                      id="auto-course-report-speed"
+                      type="number"
+                      min="0"
+                      step="0.25"
+                      value="${reportDoubleSpeed}"
+                      style="
+                          width:70px;
+                          padding:4px 5px;
+                          border:1px solid #666;
+                          border-radius:4px;
+                          background:#222;
+                          color:#fff;
+                      "
+                  >
+
+                  <button
+                      id="auto-course-set-report-speed"
+                      style="
+                          cursor:pointer;
+                          padding:4px 8px;
+                      "
+                  >
+                      设置上传值
+                  </button>
+
+              </div>
+
+
+                <div
+                    style="
+                        display:flex;
+                        gap:12px;
+                        margin-bottom:8px;
+                    "
+                >
+
+                    <label>
+
+                        <input
+                            id="auto-course-auto-resume"
+                            type="checkbox"
+                            ${
+                                CONFIG.autoResume
+                                    ? 'checked'
+                                    : ''
+                            }
+                        >
+
+                        暂停自动继续
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            id="auto-course-auto-next"
+                            type="checkbox"
+                            ${
+                                CONFIG.autoNext
+                                    ? 'checked'
+                                    : ''
+                            }
+                        >
+
+                        自动下一项
+
+                    </label>
+
+                </div>
+
+
+                <div
+                    style="
+                        color:#bbb;
+                        margin-bottom:5px;
+                    "
+                >
+                    运行日志
+                </div>
+
+
+                <div
+                    id="auto-course-log"
+                    style="
+                        height:210px;
+                        overflow:auto;
+                        background:#111;
+                        border-radius:5px;
+                        padding:7px;
+                        font-family:Consolas,monospace;
+                        font-size:12px;
+                        line-height:1.45;
+                    "
+                ></div>
+
+
+                <div
+                    style="
+                        margin-top:8px;
+                    "
+                >
+
+                    <button
+                        id="auto-course-clear-log"
+                        style="
+                            cursor:pointer;
+                            padding:4px 8px;
+                        "
+                    >
+                        清空日志
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+
+        document.body.appendChild(
+            panel
+        );
+
+
+        logBox =
+            document.getElementById(
+                'auto-course-log'
+            );
+
+        statusText =
+            document.getElementById(
+                'auto-course-status'
+            );
+
+        rateInput =
+            document.getElementById(
+                'auto-course-rate'
+            );
+
+
+        /*
+         * 把悬浮窗建立前的日志补进来
+         */
+        flushPendingLogs();
+
+
+        /**************************************************************
+         * 设置倍速
+         **************************************************************/
+
+        document
+            .getElementById(
+                'auto-course-set-rate'
+            )
+            .addEventListener(
+                'click',
+                () => {
+
+                    let value =
+                        Number(
+                            rateInput.value
+                        );
+
+
+                    if (
+                        !Number.isFinite(
+                            value
+                        )
+                    ) {
+
+                        log(
+                            '倍速输入无效'
+                        );
+
+                        return;
+                    }
+
+
+                    value =
+                        Math.max(
+                            CONFIG.minPlaybackRate,
+                            Math.min(
+                                CONFIG.maxPlaybackRate,
+                                value
+                            )
+                        );
+
+
+                    playbackRate =
+                        value;
+
+
+                    rateInput.value =
+                        String(value);
+
+
+                    localStorage.setItem(
+                        'autoCoursePlaybackRate',
+                        String(value)
+                    );
+
+
+                    applyPlaybackRate();
+
+
+                    log(
+                        `实际播放倍速设置为 ${value}x`
+                    );
+                }
+            );
+        /**************************************************************
+         * 设置上传
+         **************************************************************/
+        document
+        .getElementById(
+            'auto-course-set-report-speed'
+        )
+        .addEventListener(
+            'click',
+            () => {
+
+                const input =
+                    document.getElementById(
+                        'auto-course-report-speed'
+                    );
+
+                const value =
+                    Number(
+                        input.value
+                    );
+
+                if (
+                    !Number.isFinite(value) ||
+                    value < 0
+                ) {
+                    log(
+                        '上传 doubleSpeed 输入无效'
+                    );
+
+                    return;
+                }
+
+                reportDoubleSpeed =
+                    value;
+
+                localStorage.setItem(
+                    'autoCourseReportDoubleSpeed',
+                    String(value)
+                );
+
+                log(
+                    `上传 doubleSpeed 已设置为：${value}`
+                );
+            }
+        );
+
+
+        /**************************************************************
+         * 手动播放按钮
+         **************************************************************/
+
+        document
+            .getElementById(
+                'auto-course-play'
+            )
+            .addEventListener(
+                'click',
+                async () => {
+
+                    log(
+                        '手动点击悬浮窗播放按钮'
+                    );
+
+                    await resumeVideo();
+                }
+            );
+
+
+        /**************************************************************
+         * 手动下一项
+         **************************************************************/
+
+        document
+            .getElementById(
+                'auto-course-next'
+            )
+            .addEventListener(
+                'click',
+                async () => {
+
+                    log(
+                        '手动执行下一学习内容'
+                    );
+
+                    await goNextLearningContent();
+                }
+            );
+
+
+        /**************************************************************
+         * 自动续播开关
+         **************************************************************/
+
+        document
+            .getElementById(
+                'auto-course-auto-resume'
+            )
+            .addEventListener(
+                'change',
+                event => {
+
+                    CONFIG.autoResume =
+                        event.target.checked;
+
+
+                    log(
+                        `暂停自动继续：${
+                            CONFIG.autoResume
+                                ? '开启'
+                                : '关闭'
+                        }`
+                    );
+                }
+            );
+
+
+        /**************************************************************
+         * 自动下一项
+         **************************************************************/
+
+        document
+            .getElementById(
+                'auto-course-auto-next'
+            )
+            .addEventListener(
+                'change',
+                event => {
+
+                    CONFIG.autoNext =
+                        event.target.checked;
+
+
+                    log(
+                        `自动下一项：${
+                            CONFIG.autoNext
+                                ? '开启'
+                                : '关闭'
+                        }`
+                    );
+                }
+            );
+
+
+        /**************************************************************
+         * 清空日志
+         **************************************************************/
+
+        document
+            .getElementById(
+                'auto-course-clear-log'
+            )
+            .addEventListener(
+                'click',
+                () => {
+
+                    logBox.innerHTML = '';
+
+                    log(
+                        '日志已清空'
+                    );
+                }
+            );
+
+
+        /**************************************************************
+         * 折叠
+         **************************************************************/
+
+        const toggle =
+            document.getElementById(
+                'auto-course-toggle'
+            );
+
+
+        const body =
+            document.getElementById(
+                'auto-course-body'
+            );
+
+
+        toggle.addEventListener(
+            'click',
+            event => {
+
+                event.stopPropagation();
+
+
+                const hidden =
+                    body.style.display ===
+                    'none';
+
+
+                body.style.display =
+                    hidden
+                        ? 'block'
+                        : 'none';
+
+
+                toggle.textContent =
+                    hidden
+                        ? '−'
+                        : '+';
+            }
+        );
+
+
+        makePanelDraggable();
+    }
+
+
+    /******************************************************************
+     * 悬浮窗拖动
+     ******************************************************************/
+
+    function makePanelDraggable() {
+
+        const header =
+            document.getElementById(
+                'auto-course-header'
+            );
+
+
+        if (
+            !header ||
+            !panel
+        ) {
+            return;
+        }
+
+
+        let dragging = false;
+
+        let offsetX = 0;
+        let offsetY = 0;
+
+
+        header.addEventListener(
+            'mousedown',
+            event => {
+
+                if (
+                    event.target.id ===
+                    'auto-course-toggle'
+                ) {
+                    return;
+                }
+
+
+                dragging = true;
+
+
+                const rect =
+                    panel.getBoundingClientRect();
+
+
+                offsetX =
+                    event.clientX -
+                    rect.left;
+
+                offsetY =
+                    event.clientY -
+                    rect.top;
+
+
+                panel.style.right =
+                    'auto';
+
+                panel.style.bottom =
+                    'auto';
+            }
+        );
+
+
+        document.addEventListener(
+            'mousemove',
+            event => {
+
+                if (!dragging) {
+                    return;
+                }
+
+
+                panel.style.left =
+                    `${
+                        event.clientX -
+                        offsetX
+                    }px`;
+
+
+                panel.style.top =
+                    `${
+                        event.clientY -
+                        offsetY
+                    }px`;
+            }
+        );
+
+
+        document.addEventListener(
+            'mouseup',
+            () => {
+
+                dragging = false;
+            }
+        );
+    }
+
+
+    /******************************************************************
+     * 页面判断
+     ******************************************************************/
+
+    function isCoursePage() {
+
+        return (
+            location.pathname
+                .startsWith(
+                    '/learn/course'
+                )
+        );
+    }
+
+
+    /******************************************************************
+     * 课程列表
+     ******************************************************************/
+
+    function getCourseNodes() {
+
+        return [
+            ...document.querySelectorAll(
+                '.chapter_tree_node .section_item'
+            )
+        ];
+    }
+
+
+    function getCourseName(
+        node
+    ) {
+
+        const element =
+            node.querySelector(
+                '.course_name'
+            );
+
+
+        if (!element) {
+            return '未知课程';
+        }
+
+
+        return element
+            .textContent
+            .trim()
+            .replace(
+                /\s+/g,
+                ' '
+            );
+    }
+
+
+    /******************************************************************
+     * 课程是否完成
+     ******************************************************************/
+
+    function isFinished(
+        node
+    ) {
+
+        /*
+         * 完成图标
+         */
+        if (
+            node.querySelector(
+                '.progress .progress_icon.full'
+            )
+        ) {
+            return true;
+        }
+
+
+        /*
+         * ElementUI progress
+         */
+        const progress =
+            node.querySelector(
+                '[role="progressbar"][aria-valuenow]'
+            );
+
+
+        if (progress) {
+
+            const value =
+                Number(
+                    progress.getAttribute(
+                        'aria-valuenow'
+                    )
+                );
+
+
+            if (
+                value >= 100
+            ) {
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
+
+    function getProgress(
+        node
+    ) {
+
+        if (
+            isFinished(node)
+        ) {
+            return 100;
+        }
+
+
+        const progress =
+            node.querySelector(
+                '[role="progressbar"][aria-valuenow]'
+            );
+
+
+        if (!progress) {
+            return 0;
+        }
+
+
+        return (
+            Number(
+                progress.getAttribute(
+                    'aria-valuenow'
+                )
+            ) || 0
+        );
+    }
+
+
+    function findNextUnfinishedCourse() {
+
+        const courses =
+            getCourseNodes();
+
+
+        log(
+            `扫描课程，共发现 ${courses.length} 项`
+        );
+
+
+        for (
+            let i = 0;
+            i < courses.length;
+            i++
+        ) {
+
+            const course =
+                courses[i];
+
+
+            const name =
+                getCourseName(
+                    course
+                );
+
+
+            const progress =
+                getProgress(
+                    course
+                );
+
+
+            log(
+                `${i + 1}/${courses.length}`,
+                name,
+                `进度 ${progress}%`
+            );
+
+
+            if (
+                !isFinished(
+                    course
+                )
+            ) {
+
+                log(
+                    `找到未完成课程：${name}`
+                );
+
+                return course;
+            }
+        }
+
+
+        return null;
+    }
+
+
+    /******************************************************************
+     * 获取播放器
+     ******************************************************************/
+
+    function getPlayer() {
+
+        return (
+            document.querySelector(
+                'xg-player'
+            ) ||
+
+            document.querySelector(
+                '.xgplayer'
+            )
+        );
+    }
+
+
+    function getVideo() {
+
+        const player =
+            getPlayer();
+
+
+        if (player) {
+
+            const video =
+                player.querySelector(
+                    'video'
+                );
+
+
+            if (video) {
+                return video;
+            }
+        }
+
+
+        return document.querySelector(
+            'video'
+        );
+    }
+
+
+    /******************************************************************
+     * 初始播放按钮
+     ******************************************************************/
+
+    function getStartButton() {
+
+        const player =
+            getPlayer();
+
+
+        if (!player) {
+            return null;
+        }
+
+
+        return (
+            player.querySelector(
+                'xg-start.xgplayer-start'
+            ) ||
+
+            player.querySelector(
+                '.xgplayer-start'
+            )
+        );
+    }
+
+
+    /******************************************************************
+     * 播放 / 暂停控制按钮
+     *
+     * 对应：
+     *
+     * <xg-icon class="xgplayer-icon">
+     ******************************************************************/
+
+    function getPlayPauseButton() {
+
+        const player =
+            getPlayer();
+
+
+        if (!player) {
+            return null;
+        }
+
+
+        const buttons = [
+            ...player.querySelectorAll(
+                'xg-icon.xgplayer-icon'
+            )
+        ];
+
+
+        for (
+            const button of buttons
+        ) {
+
+            if (
+                button.querySelector(
+                    '.xgplayer-icon-play'
+                ) &&
+                button.querySelector(
+                    '.xgplayer-icon-pause'
+                )
+            ) {
+
+                return button;
+            }
+        }
+
+
+        return null;
+    }
+
+
+    /******************************************************************
+     * 下一个学习内容
+     ******************************************************************/
+
+    function getNextButton() {
+
+        const button =
+            document.querySelector(
+                '.video_btn.next_video_btn'
+            );
+
+
+        if (!button) {
+            return null;
+        }
+
+
+        const style =
+            getComputedStyle(
+                button
+            );
+
+
+        if (
+            style.display === 'none' ||
+            style.visibility ===
+                'hidden' ||
+            style.pointerEvents ===
+                'none'
+        ) {
+
+            return null;
+        }
+
+
+        if (
+            button.classList.contains(
+                'disabled'
+            )
+        ) {
+            return null;
+        }
+
+
+        return button;
+    }
+
+
+    /******************************************************************
+     * 应用实际播放倍速
+     ******************************************************************/
+
+    function applyPlaybackRate(
+        video = getVideo()
+    ) {
+
+        if (!video) {
+            return false;
+        }
+
+
+        try {
+
+            video.playbackRate =
+                playbackRate;
+
+            video.defaultPlaybackRate =
+                playbackRate;
+
+
+            log(
+                `已应用实际播放倍速：${playbackRate}x`
+            );
+
+
+            return true;
+
+        } catch (error) {
+
+            log(
+                '设置倍速失败：',
+                error
+            );
+
+
+            return false;
+        }
+    }
+
+
+    /******************************************************************
+     * 恢复播放
+     ******************************************************************/
+
+    async function resumeVideo() {
+
+        const video =
+            getVideo();
+
+
+        if (!video) {
+
+            log(
+                '恢复播放失败：没有找到 video'
+            );
+
+            return false;
+        }
+
+
+        if (
+            video.ended
+        ) {
+
+            log(
+                '视频已经结束，不执行恢复播放'
+            );
+
+            return false;
+        }
+
+
+        applyPlaybackRate(
+            video
+        );
+
+
+        /*
+         * 已经播放
+         */
+        if (
+            !video.paused
+        ) {
+
+            log(
+                '视频已经处于播放状态'
+            );
+
+            return true;
+        }
+
+
+        /*
+         * 已经播放过的视频：
+         *
+         * 点击正常播放 / 暂停按钮
+         */
+        if (
+            video.currentTime > 0
+        ) {
+
+            const control =
+                getPlayPauseButton();
+
+
+            if (control) {
+
+                log(
+                    '点击 xgplayer 播放/暂停按钮恢复播放'
+                );
+
+
+                control.click();
+
+
+                await sleep(600);
+
+
+                if (
+                    !video.paused
+                ) {
+
+                    applyPlaybackRate(
+                        video
+                    );
+
+                    return true;
+                }
+            }
+        }
+
+
+        /*
+         * 第一次启动：
+         *
+         * 尝试初始大按钮
+         */
+        if (
+            video.currentTime <= 0
+        ) {
+
+            const start =
+                getStartButton();
+
+
+            if (start) {
+
+                log(
+                    '尝试点击播放器初始播放按钮'
+                );
+
+
+                start.click();
+
+
+                await sleep(600);
+
+
+                if (
+                    !video.paused
+                ) {
+
+                    applyPlaybackRate(
+                        video
+                    );
+
+                    return true;
+                }
+            }
+        }
+
+
+        /*
+         * 最后使用 HTML5 play() 兜底
+         */
+        try {
+
+            log(
+                '尝试使用 video.play() 播放'
+            );
+
+
+            await video.play();
+
+
+            applyPlaybackRate(
+                video
+            );
+
+
+            return true;
+
+        } catch (error) {
+
+            log(
+                '自动播放失败，可能需要手动点击第一个视频'
+            );
+
+
+            return false;
+        }
+    }
+
+
+    /******************************************************************
+     * 自动恢复暂停
+     ******************************************************************/
+
+    async function autoResumeIfPaused() {
+
+        if (
+            !CONFIG.autoResume ||
+            autoResumeBusy ||
+            switching
+        ) {
+            return;
+        }
+
+
+        const video =
+            getVideo();
+
+
+        if (!video) {
+            return;
+        }
+
+
+        if (
+            video.ended ||
+            video.dataset
+                .autoCourseEnding ===
+                '1'
+        ) {
+            return;
+        }
+
+
+        if (
+            video.readyState < 2
+        ) {
+            return;
+        }
+
+
+        if (
+            !video.paused
+        ) {
+            return;
+        }
+
+
+        /*
+         * 0 秒表示可能还是第一个视频尚未启动，
+         * 不作为中途暂停处理。
+         */
+        if (
+            video.currentTime <= 0
+        ) {
+            return;
+        }
+
+
+        autoResumeBusy =
+            true;
+
+
+        log(
+            `检测到暂停，当前位置 ${video.currentTime.toFixed(1)} 秒`
+        );
+
+
+        await resumeVideo();
+
+
+        autoResumeBusy =
+            false;
+    }
+
+
+    /******************************************************************
+     * 等待播放器
+     ******************************************************************/
+
+    async function tryStartVideo() {
+
+        setStatus(
+            '等待播放器'
+        );
+
+
+        log(
+            '等待播放器加载...'
+        );
+
+
+        for (
+            let i = 0;
+            i <
+                CONFIG.playerMaxChecks;
+            i++
+        ) {
+
+            const video =
+                getVideo();
+
+
+            if (video) {
+
+                log(
+                    '已检测到 video 元素'
+                );
+
+
+                attachVideoEvents(
+                    video
+                );
+
+
+                applyPlaybackRate(
+                    video
+                );
+
+
+                if (
+                    !video.paused &&
+                    !video.ended
+                ) {
+
+                    setStatus(
+                        `播放中 ${playbackRate}x`
+                    );
+
+                    return true;
+                }
+
+
+                const success =
+                    await resumeVideo();
+
+
+                if (success) {
+
+                    setStatus(
+                        `播放中 ${playbackRate}x`
+                    );
+
+                    return true;
+                }
+            }
+
+
+            await sleep(
+                CONFIG.playerCheckInterval
+            );
+        }
+
+
+        setStatus(
+            '需要手动播放'
+        );
+
+
+        log(
+            '自动播放没有成功，请手动点击一次第一个视频'
+        );
+
+
+        return false;
+    }
+
+
+    /******************************************************************
+     * 打开课程
+     ******************************************************************/
+
+    async function openCourse(
+        course
+    ) {
+
+        if (!course) {
+            return false;
+        }
+
+
+        currentCourseName =
+            getCourseName(
+                course
+            );
+
+
+        setStatus(
+            '正在进入课程'
+        );
+
+
+        log(
+            `准备进入课程：${currentCourseName}`
+        );
+
+
+        course.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+
+
+        await sleep(500);
+
+
+        course.click();
+
+
+        log(
+            '已点击课程节点'
+        );
+
+
+        await sleep(
+            CONFIG.courseLoadDelay
+        );
+
+
+        return await tryStartVideo();
+    }
+
+
+    /******************************************************************
+     * 视频结束
+     ******************************************************************/
+
+    async function handleVideoFinished(
+        video
+    ) {
+
+        /*
+         * ended 和 timeupdate
+         * 可能同时触发。
+         */
+        if (
+            video.dataset
+                .autoCourseEnding ===
+                '1'
+        ) {
+            return;
+        }
+
+
+        video.dataset.autoCourseEnding =
+            '1';
+
+
+        if (switching) {
+            return;
+        }
+
+
+        switching = true;
+
+
+        setStatus(
+            '视频已结束'
+        );
+
+
+        log(
+            `视频播放完成：${
+                currentCourseName ||
+                '当前学习内容'
+            }`
+        );
+
+
+        await sleep(
+            CONFIG.finishDelay
+        );
+
+
+        if (
+            CONFIG.autoNext
+        ) {
+
+            await goNextLearningContent();
+
+        } else {
+
+            setStatus(
+                '等待操作'
+            );
+
+
+            log(
+                '自动下一项已关闭'
+            );
+        }
+
+
+        switching = false;
+    }
+
+
+    /******************************************************************
+     * 下一学习内容
+     ******************************************************************/
+
+    async function goNextLearningContent() {
+
+        const nextButton =
+            getNextButton();
+
+
+        if (nextButton) {
+
+            log(
+                '找到「下一个学习内容」按钮'
+            );
+
+
+            setStatus(
+                '切换下一项'
+            );
+
+
+            nextButton.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+
+
+            await sleep(300);
+
+
+            nextButton.click();
+
+
+            log(
+                '已点击「下一个学习内容」'
+            );
+
+
+            await sleep(
+                CONFIG.nextLoadDelay
+            );
+
+
+            const success =
+                await tryStartVideo();
+
+
+            if (success) {
+
+                log(
+                    '下一项已经开始播放'
+                );
+
+                return true;
+            }
+
+
+            log(
+                '点击下一项后没有正常启动播放器'
+            );
+        }
+
+
+        /*
+         * 找不到下一按钮：
+         *
+         * 回课程列表扫描。
+         */
+        log(
+            '未找到可用的下一项按钮，重新扫描课程'
+        );
+
+
+        working = false;
+
+
+        await sleep(1000);
+
+
+        await playNextCourse();
+
+
+        return false;
+    }
+
+
+    /******************************************************************
+     * 给 video 绑定事件
+     ******************************************************************/
+
+    function attachVideoEvents(
+        video
+    ) {
+
+        if (!video) {
+            return;
+        }
+
+
+        /*
+         * 防止重复绑定
+         */
+        if (
+            video.dataset
+                .autoCourseBound ===
+                '1'
+        ) {
+            return;
+        }
+
+
+        video.dataset.autoCourseBound =
+            '1';
+
+        video.dataset.autoCourseEnding =
+            '0';
+
+
+        log(
+            '绑定 video 播放事件'
+        );
+
+
+        /**************************************************************
+         * 视频元信息
+         **************************************************************/
+
+        video.addEventListener(
+            'loadedmetadata',
+            () => {
+
+                log(
+                    `视频时长：${
+                        Number.isFinite(
+                            video.duration
+                        )
+                            ? video.duration
+                                .toFixed(1)
+                            : '?'
+                    } 秒`
+                );
+
+
+                applyPlaybackRate(
+                    video
+                );
+            }
+        );
+
+
+        /**************************************************************
+         * 可播放
+         **************************************************************/
+
+        video.addEventListener(
+            'canplay',
+            () => {
+
+                applyPlaybackRate(
+                    video
+                );
+            }
+        );
+
+
+        /**************************************************************
+         * 倍速被播放器修改
+         **************************************************************/
+
+        video.addEventListener(
+            'ratechange',
+            () => {
+
+                if (
+                    Math.abs(
+                        video.playbackRate -
+                        playbackRate
+                    ) > 0.01
+                ) {
+
+                    log(
+                        `播放器把实际倍速改成 ${video.playbackRate}x，准备恢复 ${playbackRate}x`
+                    );
+
+
+                    setTimeout(
+                        () => {
+
+                            if (
+                                getVideo() ===
+                                video
+                            ) {
+
+                                try {
+
+                                    video.playbackRate =
+                                        playbackRate;
+
+                                } catch (
+                                    error
+                                ) {
+                                    // ignore
+                                }
+                            }
+
+                        },
+                        100
+                    );
+                }
+            }
+        );
+
+
+        /**************************************************************
+         * 开始播放
+         **************************************************************/
+
+        video.addEventListener(
+            'play',
+            () => {
+
+                video.dataset
+                    .autoCourseEnding =
+                    '0';
+
+
+                applyPlaybackRate(
+                    video
+                );
+
+
+                setStatus(
+                    `播放中 ${playbackRate}x`
+                );
+
+
+                log(
+                    `开始播放，当前位置 ${video.currentTime.toFixed(1)} 秒`
+                );
+            }
+        );
+
+
+        /**************************************************************
+         * 暂停
+         **************************************************************/
+
+        video.addEventListener(
+            'pause',
+            async () => {
+
+                if (
+                    video.ended ||
+                    video.dataset
+                        .autoCourseEnding ===
+                        '1'
+                ) {
+                    return;
+                }
+
+
+                setStatus(
+                    '检测到暂停'
+                );
+
+
+                log(
+                    `收到 pause 事件，当前位置 ${video.currentTime.toFixed(1)} 秒`
+                );
+
+
+                if (
+                    !CONFIG.autoResume
+                ) {
+                    return;
+                }
+
+
+                await sleep(
+                    CONFIG.pauseResumeDelay
+                );
+
+
+                if (
+                    video.paused &&
+                    !video.ended
+                ) {
+
+                    await autoResumeIfPaused();
+                }
+            }
+        );
+
+
+        /**************************************************************
+         * 正常播放结束
+         **************************************************************/
+
+        video.addEventListener(
+            'ended',
+            async () => {
+
+                log(
+                    '收到 ended 事件'
+                );
+
+
+                await handleVideoFinished(
+                    video
+                );
+            }
+        );
+
+
+        /**************************************************************
+         * timeupdate 结束保险
+         **************************************************************/
+
+        video.addEventListener(
+            'timeupdate',
+            async () => {
+
+                if (
+                    !video.duration ||
+                    !Number.isFinite(
+                        video.duration
+                    )
+                ) {
+                    return;
+                }
+
+
+                if (
+                    video.currentTime <= 0
+                ) {
+                    return;
+                }
+
+
+                const remaining =
+                    video.duration -
+                    video.currentTime;
+
+
+                if (
+                    remaining <=
+                    CONFIG.endThreshold
+                ) {
+
+                    await handleVideoFinished(
+                        video
+                    );
+                }
+            }
+        );
+
+
+        /**************************************************************
+         * 播放错误
+         **************************************************************/
+
+        video.addEventListener(
+            'error',
+            () => {
+
+                setStatus(
+                    '播放器错误'
+                );
+
+
+                log(
+                    'video 播放错误',
+                    video.error || ''
+                );
+            }
+        );
+    }
+
+
+    /******************************************************************
+     * 扫描课程
+     ******************************************************************/
+
+    async function playNextCourse() {
+
+        if (working) {
+            return;
+        }
+
+
+        if (
+            !isCoursePage()
+        ) {
+            return;
+        }
+
+
+        working = true;
+
+
+        setStatus(
+            '扫描课程'
+        );
+
+
+        log(
+            '开始扫描未完成课程'
+        );
+
+
+        await sleep(1000);
+
+
+        const nextCourse =
+            findNextUnfinishedCourse();
+
+
+        if (!nextCourse) {
+
+            setStatus(
+                '全部完成'
+            );
+
+
+            log(
+                '没有发现未完成课程'
+            );
+
+
+            working = false;
+
+            return;
+        }
+
+
+        const success =
+            await openCourse(
+                nextCourse
+            );
+
+
+        if (!success) {
+
+            /*
+             * 第一个视频可能因为浏览器
+             * 自动播放限制无法启动。
+             *
+             * 这里不继续乱点，
+             * 用户可以自己手动点击一次。
+             */
+            setStatus(
+                '等待手动播放'
+            );
+
+
+            log(
+                '如果这是第一个视频，请手动点击一次播放按钮'
+            );
+        }
+
+
+        working = false;
+    }
+
+
+    /******************************************************************
+     * MutationObserver
+     *
+     * Vue / SPA 创建新 video 后自动绑定
+     ******************************************************************/
+
+    const observer =
+        new MutationObserver(
+            () => {
+
+                const video =
+                    getVideo();
+
+
+                if (!video) {
+                    return;
+                }
+
+
+                if (
+                    video.dataset
+                        .autoCourseBound !==
+                        '1'
+                ) {
+
+                    log(
+                        '检测到新的 video'
+                    );
+
+
+                    attachVideoEvents(
+                        video
+                    );
+
+
+                    applyPlaybackRate(
+                        video
+                    );
+                }
+            }
+        );
+
+
+    /******************************************************************
+     * 定时检测暂停
+     ******************************************************************/
+
+    setInterval(
+        async () => {
+
+            if (
+                !CONFIG.autoResume
+            ) {
+                return;
+            }
+
+
+            const video =
+                getVideo();
+
+
+            if (!video) {
+                return;
+            }
+
+
+            if (
+                video.currentTime > 0 &&
+                video.paused &&
+                !video.ended &&
+                video.dataset
+                    .autoCourseEnding !==
+                    '1'
+            ) {
+
+                await autoResumeIfPaused();
+            }
+
+        },
+        CONFIG.pauseCheckInterval
+    );
+
+
+    /******************************************************************
+     * SPA URL 变化
+     ******************************************************************/
+
+    setInterval(
+        async () => {
+
+            if (
+                location.href ===
+                oldUrl
+            ) {
+                return;
+            }
+
+
+            oldUrl =
+                location.href;
+
+
+            log(
+                `检测到 URL 变化：${oldUrl}`
+            );
+
+
+            await sleep(800);
+
+
+            const video =
+                getVideo();
+
+
+            if (video) {
+
+                attachVideoEvents(
+                    video
+                );
+
+
+                applyPlaybackRate(
+                    video
+                );
+            }
+
+        },
+        1000
+    );
+
+
+    /******************************************************************
+     * 初始化
+     ******************************************************************/
+
+    async function init() {
+
+        /*
+         * 因为使用 document-start，
+         * 等待 body 出现。
+         */
+        while (
+            !document.body
+        ) {
+            await sleep(50);
+        }
+
+
+        createFloatingPanel();
+
+
+        log(
+            '=============================='
+        );
+
+
+        log(
+            '课程自动播放助手 V4 已启动'
+        );
+
+
+        log(
+            `当前实际播放倍速：${playbackRate}x`
+        );
+
+
+        log(
+            `learntime 上传 doubleSpeed 当前值：${reportDoubleSpeed}`
+        );
+
+
+        log(
+            '第一个视频如果无法自动播放，请手动点击一次'
+        );
+
+
+        log(
+            '=============================='
+        );
+
+
+        setStatus(
+            '初始化'
+        );
+
+
+        if (
+            !isCoursePage()
+        ) {
+
+            setStatus(
+                '非课程页面'
+            );
+
+
+            log(
+                '当前不是课程页面'
+            );
+
+
+            return;
+        }
+
+
+        observer.observe(
+            document.documentElement,
+            {
+                childList: true,
+                subtree: true
+            }
+        );
+
+
+        await sleep(
+            CONFIG.initDelay
+        );
+
+
+        /*
+         * 页面已经存在播放器
+         */
+        const existingVideo =
+            getVideo();
+
+
+        if (existingVideo) {
+
+            log(
+                '页面已经存在播放器'
+            );
+
+
+            attachVideoEvents(
+                existingVideo
+            );
+
+
+            applyPlaybackRate(
+                existingVideo
+            );
+
+
+            await tryStartVideo();
+
+
+            return;
+        }
+
+
+        /*
+         * 没有播放器：
+         *
+         * 扫描第一个未完成课程
+         */
+        await playNextCourse();
+    }
+
+
+    init();
+
+})();
