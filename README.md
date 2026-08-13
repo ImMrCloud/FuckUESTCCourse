@@ -37,13 +37,16 @@
 推荐：
 
 - Tampermonkey（篡改猴）
-- Violentmonkey（暴力猴）
 
 Microsoft Edge、Chrome、Firefox 等浏览器均可以使用。
 
+Edge: https://microsoftedge.microsoft.com/addons/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4/iikmkjmpaadaobahmlepeloendndfphd?hl=zh-CN
+Chrome: https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
+
+
 ---
 
-# 方法一：使用 Tampermonkey（篡改猴）
+# 方法：使用 Tampermonkey（篡改猴）（使用ViolentMoneky方法类似）
 
 ## 1. 安装 Tampermonkey
 
