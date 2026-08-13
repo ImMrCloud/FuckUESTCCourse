@@ -53,10 +53,10 @@
         defaultPlaybackRate: 1,
 
         // 最大倍速
-        maxPlaybackRate: 16,
+        maxPlaybackRate: 2,
 
         // 最低倍速
-        minPlaybackRate: 0.25,
+        minPlaybackRate: 0.5,
 
         // 暂停以后自动继续
         autoResume: true,
